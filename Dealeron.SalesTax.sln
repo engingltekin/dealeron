@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dealeron.SalesTax", "Dealeron.SalesTax\Dealeron.SalesTax.csproj", "{3DCFBC75-7C25-4BD1-B39B-20F6FAA175C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dealeron.SalesTax.Tests", "Dealeron.SalesTax.Tests\Dealeron.SalesTax.Tests.csproj", "{E484A3B0-3A56-45FC-8CCC-66801850AC2A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3DCFBC75-7C25-4BD1-B39B-20F6FAA175C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DCFBC75-7C25-4BD1-B39B-20F6FAA175C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DCFBC75-7C25-4BD1-B39B-20F6FAA175C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DCFBC75-7C25-4BD1-B39B-20F6FAA175C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E484A3B0-3A56-45FC-8CCC-66801850AC2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E484A3B0-3A56-45FC-8CCC-66801850AC2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E484A3B0-3A56-45FC-8CCC-66801850AC2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E484A3B0-3A56-45FC-8CCC-66801850AC2A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

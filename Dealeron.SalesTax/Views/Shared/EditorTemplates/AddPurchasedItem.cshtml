@@ -1,0 +1,63 @@
+﻿@using MVC.Series.Web.Extensions
+@model Dealeron.SalesTax.Models.PurchasedItem
+<div class="row" id="purchasedItemRow">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="col-md-8">
+
+                    <h3 class="panel-title">Item Information</h3>
+                </div>
+                
+            </div>
+            <div class="panel-body form-panel">
+                @using (Html.BeginCollectionItem("PurchasedItems"))
+                {
+                    <div class="form-group row">
+                        <div class="col-lg-5 col-md-5 col-sm-5">
+                            @Html.LabelFor(m => m.Description, htmlAttributes: new { @class = "" })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger alert-danger" })
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-7">
+                            @Html.TextBoxFor(model => model.Description, new { @class = "form-control" })
+                            @Html.HiddenFor(x => x.Description)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-5 col-md-5 col-sm-5">
+                            @Html.LabelFor(m => m.Category, htmlAttributes: new { @class = "" })
+                            @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger alert-danger" })
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-7">
+                            @Html.EnumDropDownListFor(model => model.Category, new { @class = "form-control" })
+                            @Html.HiddenFor(x => x.Category)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-5 col-md-5 col-sm-5">
+                            @Html.LabelFor(m => m.UnitPrice, htmlAttributes: new { @class = "" })
+                            @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger alert-danger" })
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-7">
+                            @Html.TextBoxFor(model => model.UnitPrice, new { @class = "form-control" })
+                            @Html.HiddenFor(x => x.UnitPrice)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-5 col-md-5 col-sm-5">
+                            @Html.CheckBoxFor(model => model.ImportProduct)<span style="font-weight:bold;"> @Dealeron.SalesTax.Resources.Resource.Import</span>
+                            @Html.HiddenFor(x => x.ImportProduct)
+                        </div>
+                    </div>
+                    if (ViewData["AllowDelete"] ==null)
+                    {
+                        <div class="form-group row">
+                            <div class="col-md-5"><a class="btn btn-danger" href="#purchasedItemFormGroup" onclick="if ($('#purchaseditems').children().length > 1) { $(this).closest('#purchasedItemRow').remove(); }">Remove Item</a></div>
+                        </div>
+                    }
+
+                }
+            </div>
+        </div>
+    </div>
+</div>

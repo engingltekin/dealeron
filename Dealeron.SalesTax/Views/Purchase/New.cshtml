@@ -1,0 +1,55 @@
+﻿@model Dealeron.SalesTax.Models.PurchasedItemsViewModel
+@{
+    ViewBag.Title = "Shopping";
+}
+
+
+<div class="container">
+    <div class="col-lg-10 col-md-10 col-sm-10 content-area">
+        @using (Html.BeginForm("New", "Purchase", null, FormMethod.Post, new { role = "form" }))
+        {
+            <div class="text-center"><h2>List of Purchased Items</h2></div>
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div id="purchaseditems">
+                @if (Model.PurchasedItems.Count == 0)
+                {
+                    var purchasedItemViewDataDic = new ViewDataDictionary(ViewData);
+                    purchasedItemViewDataDic.Add("AllowDelete", false);
+                    @Html.Partial("~/Views/Shared/EditorTemplates/AddPurchasedItem.cshtml", new Dealeron.SalesTax.Models.PurchasedItem(), purchasedItemViewDataDic)
+                }
+                else
+                {
+                    foreach (var m in Model.PurchasedItems)
+                    {
+                        var i = Model.PurchasedItems.IndexOf(m);
+                        
+                            @Html.Partial("~/Views/Shared/EditorTemplates/AddPurchasedItem.cshtml", Model.PurchasedItems[i])
+                        
+                    }
+                }
+            </div>
+            <div class="row">
+                @Html.ActionLink(@Dealeron.SalesTax.Resources.Resource.AddItem, "AddPurchasedItem", null, new { id= "addPurchasedItemViaAjaxId", @class = "btn btn-lg btn-primary pull-right" })
+            </div>
+            <div class="form-group row">
+                <div class="col-md-10">
+                    <input type="submit" value="@Dealeron.SalesTax.Resources.Resource.Checkout" id="submitButton" class="btn btn-lg btn-primary pull-right"/>
+                    
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script>
+    $("#addPurchasedItemViaAjaxId").click(function () {
+        $.ajax({
+            url: this.href,
+            cache: false,
+            success: function (html) {
+                $("#purchaseditems").append(html);
+            }
+        });
+        return false;
+    });
+</script>

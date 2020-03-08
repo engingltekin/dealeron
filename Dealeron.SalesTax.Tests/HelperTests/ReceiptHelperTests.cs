@@ -94,7 +94,7 @@ namespace Dealeron.SalesTax.Tests.HelperTests
             _receiptHelper.ProcessReceipt();
             var purchasedItem = _receiptHelper.ReceiptModel.PurchasedItems.FirstOrDefault();
             Assert.AreEqual(4.20m, purchasedItem.TaxAmount);
-            Assert.AreEqual(32.19, purchasedItem.TotalUnitPrice);
+            Assert.AreEqual(32.19m, purchasedItem.TotalUnitPrice);
         }
         private Models.PurchasedItem ProcessReceipt()
         {

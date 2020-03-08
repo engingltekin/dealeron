@@ -14,6 +14,7 @@ namespace Dealeron.SalesTax.Tests.HelperTests
         private ITaxCalcHelper _taxHelper;
         private const decimal _evenTaxAmount = 0.60m;
         private const decimal _greaterThenFiveTaxAmount = 2.72m;
+        private const decimal _equalToFiveTaxAmount = 2.70m;
         private const decimal _lessThenFiveTaxAmount = 2.64m;
         private const decimal _taxPercentage = 0.5m;
         [TestInitialize]
@@ -44,6 +45,15 @@ namespace Dealeron.SalesTax.Tests.HelperTests
         public void RoundUpTaxesWithLessThenFive()
         {
             decimal RoundedLessTax = _taxHelper.CalculateTaxes(_lessThenFiveTaxAmount, _taxPercentage, 2);
+            var expectedResult = 2.70m;
+            // Then 
+            Assert.AreEqual(expectedResult, RoundedLessTax);
+        }
+
+        [TestMethod]
+        public void RoundUpTaxesWithEqualToFive()
+        {
+            decimal RoundedLessTax = _taxHelper.CalculateTaxes(_equalToFiveTaxAmount, _taxPercentage, 2);
             var expectedResult = 2.70m;
             // Then 
             Assert.AreEqual(expectedResult, RoundedLessTax);

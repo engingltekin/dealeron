@@ -155,4 +155,8 @@
     <value>Price</value>
     <comment>PurchasedItem</comment>
   </data>
+  <data name="PurchasedItemExist" xml:space="preserve">
+    <value>Please scan at least one purchased item information</value>
+    <comment>Purchased Item Validation</comment>
+  </data>
 </root>

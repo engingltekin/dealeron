@@ -20,7 +20,9 @@ namespace Dealeron.SalesTax.Controllers
         {
             return View(new PurchasedItemsViewModel());
         }
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult New(PurchasedItemsViewModel model)
         {
             IReceiptHelper receipt = new ReceiptHelper(model);

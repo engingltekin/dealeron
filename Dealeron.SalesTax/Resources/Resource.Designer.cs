@@ -149,5 +149,14 @@ namespace Dealeron.SalesTax.Resources {
                 return ResourceManager.GetString("Price", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please scan at least one purchased item information.
+        /// </summary>
+        public static string PurchasedItemExist {
+            get {
+                return ResourceManager.GetString("PurchasedItemExist", resourceCulture);
+            }
+        }
     }
 }

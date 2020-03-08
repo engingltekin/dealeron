@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentValidation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -26,7 +27,22 @@ namespace Dealeron.SalesTax.Models
 
         public List<PurchasedItem> PurchasedItems { get; set; }
     }
+    public class PurchasedItemsViewModelValidator : AbstractValidator<PurchasedItemsViewModel>
+    {
+        public PurchasedItemsViewModelValidator()
+        {
 
+            RuleFor(m => m.PurchasedItems)
+                .Cascade(CascadeMode.StopOnFirstFailure)
+                .NotEmpty().WithMessage(x => Resources.Resource.PurchasedItemExist)
+                .Must(PurchasedItemExist).WithMessage(x => Resources.Resource.PurchasedItemExist);
+        }
+
+        private bool PurchasedItemExist(List<PurchasedItem> arg)
+        {
+            return arg.Count() > 0;
+        }
+    }
     public class ReceiptViewModel
     {
         public ReceiptViewModel()

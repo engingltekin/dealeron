@@ -5,7 +5,7 @@
 }
 
 <div class="container">
-    <div class="col-lg-10 col-md-10 col-sm-10 content-area">
+    <div class="col-lg-10 col-md-10 col-sm-10 content-area" style="margin-top:50px">
         @if (Model.PurchasedItems.Count == 0)
         {
             <p class="order-text">You have not scanned any item. Please go back and scan items at your basket. </p>
@@ -14,11 +14,13 @@
         }
         else
         {
+            <h3><strong>Receipt</strong></h3>
+            <hr />
             foreach (Dealeron.SalesTax.Models.PurchasedItem item in Model.PurchasedItems)
             {
                 <div class="row">
                     <div class="col-md-6"><p class="order-text">@item.Description: </p></div>
-                    <div class="col-md-6"><p class="order-text"> <span class="order-data pull-right">@item.TotalUnitPrice @(item.Quantity > 1 ? "(" + item.Quantity + " @ " + item.UnitPrice + ")" : "")</span> </p></div>
+                    <div class="col-md-6"><p class="order-text"> <span class="order-data pull-right">@item.TotalUnitPrice @(item.Quantity > 1 ? "(" + item.Quantity + " @ " + item.TotalUnitPrice/item.Quantity + ")" : "")</span> </p></div>
                 </div>
             }
             <div class="row">

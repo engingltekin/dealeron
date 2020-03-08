@@ -83,6 +83,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtensionTests\EnumExtensionsTests.cs" />
+    <Compile Include="HelperTests\ReceiptHelperTests.cs" />
+    <Compile Include="HelperTests\TaxCalcHelperTests.cs" />
+    <Compile Include="MockData\MockDataHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\PurchaseControllerTest.cs" />
   </ItemGroup>

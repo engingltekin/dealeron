@@ -13,7 +13,7 @@ namespace Dealeron.SalesTax.Tests.ExtensionTests
     public class EnumExtensionTests
     {
         [TestMethod]
-        public void WelcomeSurveyExtensions()
+        public void ItemCategoryExtensions()
         {
             // Given 
             foreach (Enum value in Enum.GetValues(typeof(ItemCategory)))

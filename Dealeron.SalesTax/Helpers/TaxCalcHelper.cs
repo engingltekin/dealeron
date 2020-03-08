@@ -11,31 +11,46 @@ namespace Dealeron.SalesTax.Helpers
 
     }
 
-    public interface ITaxCalcHelper: ITaxHelperBase
+    public interface ITaxCalcHelper : ITaxHelperBase
     {
-        decimal CalculateTaxes(decimal totalPrice, decimal taxPercentage);
+        decimal CalculateTaxes(decimal unitPrice, decimal taxPercentage, int quantity);
     }
-    public class TaxCalcHelper: ITaxCalcHelper
+    public class TaxCalcHelper : ITaxCalcHelper
     {
 
-        private List<PurchasedItem> _itemList {get; set;}
+        private List<PurchasedItem> _itemList { get; set; }
         public TaxCalcHelper()
         {
 
         }
-       
-        public decimal CalculateTaxes(decimal totalPrice, decimal taxPercentage)
+
+        public decimal CalculateTaxes(decimal totalPrice, decimal taxPercentage, int quantity)
         {
-            return  RoundUpTaxes(totalPrice, taxPercentage);
+            return RoundUpTaxes(totalPrice, taxPercentage, quantity);
         }
 
-        private decimal RoundUpTaxes(decimal totalPrice, decimal taxPercentage)
+        private decimal RoundUpTaxes(decimal unitPrice, decimal taxPercentage, int quantity)
         {
-            var taxAmount = totalPrice * taxPercentage;
-            decimal evenAmount = Convert.ToDecimal(Convert.ToInt32(taxAmount));
-            decimal portionToRound = taxAmount - evenAmount;
-            var roundedPortionTax =  decimal.Round(portionToRound,1, MidpointRounding.AwayFromZero);
-            return evenAmount + roundedPortionTax;
+            var unitTaxAmount = unitPrice * taxPercentage;
+            var roundedPortionTax = decimal.Round(unitTaxAmount, 2);
+            var intTaxAmount = Convert.ToInt32(roundedPortionTax * 100);
+            int lastDigit = intTaxAmount % 10;
+            if (lastDigit == 0)
+            {
+                roundedPortionTax = intTaxAmount * 0.01m;
+            }
+            else if (lastDigit > 5)
+            {
+                intTaxAmount += (10 - lastDigit);
+                roundedPortionTax = intTaxAmount * 0.01m;
+            }
+            else
+            {
+                intTaxAmount += (5 - lastDigit);
+                roundedPortionTax = intTaxAmount * 0.01m;
+            }
+
+            return roundedPortionTax * quantity;
         }
 
         private decimal SumUpTaxes()

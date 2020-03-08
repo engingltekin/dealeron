@@ -25,14 +25,14 @@ namespace Dealeron.SalesTax.Helpers
         public bool ProcessReceipt()
         {
             //Group same purchased items
-            _model.PurchasedItems =  GroupPurchasedItemsByDescription();
-            
+            _model.PurchasedItems = GroupPurchasedItemsByDescription();
+
             //Calculate each unique items Tax percentage
             CalculateTaxPerc();
 
             CalculateTaxAmnt();
 
-            ReceiptModel.PurchasedItems = _model.PurchasedItems; 
+            ReceiptModel.PurchasedItems = _model.PurchasedItems;
             return true;
         }
 
@@ -41,17 +41,21 @@ namespace Dealeron.SalesTax.Helpers
             _taxHelper = new TaxCalcHelper();
             foreach (var item in _model.PurchasedItems)
             {
-                item.TaxAmount = _taxHelper.CalculateTaxes(item.TotalUnitPrice, item.TaxPercentage);
-                item.TotalUnitPrice += item.TaxAmount;
+                if (item.TaxPercentage > 0)
+                {
+                    item.TaxAmount = _taxHelper.CalculateTaxes(item.UnitPrice, item.TaxPercentage, item.Quantity);
+                    item.TotalUnitPrice += item.TaxAmount;
+                }
+
                 ReceiptModel.TotalTaxAmount += item.TaxAmount;
                 ReceiptModel.TotalAmount += item.TotalUnitPrice;
             }
         }
 
-        private List<PurchasedItem>  GroupPurchasedItemsByDescription()
+        private List<PurchasedItem> GroupPurchasedItemsByDescription()
         {
             List<PurchasedItem> groupedList = new List<PurchasedItem>();
-            var  groupPurchasedItems = _model.PurchasedItems
+            var groupPurchasedItems = _model.PurchasedItems
                                 .GroupBy(u => u.Description)
                                 .Select(grp => grp.ToList())
                                 .ToList();
@@ -59,7 +63,7 @@ namespace Dealeron.SalesTax.Helpers
             {
                 var firstIdenticalItem = item.FirstOrDefault();
                 firstIdenticalItem.Quantity = item.Count();
-                firstIdenticalItem.TotalUnitPrice = firstIdenticalItem.UnitPrice* item.Count();
+                firstIdenticalItem.TotalUnitPrice = firstIdenticalItem.UnitPrice * item.Count();
                 groupedList.Add(firstIdenticalItem);
             }
             return groupedList;
